@@ -1,0 +1,85 @@
+<app-dashboard></app-dashboard>
+<div class="scrollit">
+<table class="table table-bordered" >
+    <thead>
+      <tr class="table-secondary">
+        <th class="fixTable">Data</th>
+        <th>Difficulty Level</th>
+        <th>Submitted By</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+   
+    <tbody>
+     
+        <tr *ngFor="let question of questions; let i = index">
+          <td id="queOpt">
+             <b>Que {{i+1}}:</b> &nbsp; <a href='#' style="color:black;" data-toggle="modal" data-target="#showModal" (click)="showQuestionDesc(i)">{{question.question_description}}</a>
+            </td>
+            <td class="alignCenter" data-label="Difficulty Level &nbsp;: &nbsp;">{{question.q_difficulty | titlecase}}</td>
+            <td class="alignCenter" data-label="Submitted By &nbsp;: &nbsp;">Admin</td>
+          <td class="alignCenter" data-label="Action &nbsp;: &nbsp;">
+          <button class="btn btn-info" (click) = "active(i)">Active</button>&nbsp;
+        <button class="btn btn-info">Reject</button>
+      </td>
+        </tr>
+      
+      </tbody>
+</table>
+</div>
+
+<div class="modal fade" id="showModal" *ngIf="showQuest">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Question Description</h4>
+            </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-4 col-md-3">
+                      <label for="question">Question:</label>
+                  </div>
+                  <div class="col-lg-8 col-md-9">
+                      <p>{{QuestDesc}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <div class="row">
+                      <div class="col-lg-4 col-md-3">
+                          <label for="options">Options:</label>
+                      </div>
+                      <div class="col-lg-8 col-md-9">
+                          <div *ngFor="let option of showQuest.options; let i = index">
+                            <span>{{i+1}})</span> &nbsp;
+                            <span>{{option}}</span>                                                     
+                            </div>
+                      </div>
+                    </div>
+              </div>
+
+              <div class="form-group">
+                  <div class="row">
+                      <div class="col-lg-4 col-md-3">
+                          <label for="level">Difficulty Level:</label>
+                      </div>
+                      <div class="col-lg-8 col-md-9 diffLevel">
+                          {{level | titlecase}}
+                      </div>
+                    </div>
+              </div>
+            </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+    </div>

@@ -1,0 +1,24 @@
+<app-dashboard></app-dashboard>
+<div class="scrollit">
+    <table class="table table-bordered" >
+        <thead>
+          <tr class="table-secondary">
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Score</th> 
+          </tr>
+        </thead>
+       
+        <tbody>
+            <tr *ngFor="let data of userList; let i=index ">
+              <td data-label="User ID &nbsp;: &nbsp;">{{data.user_id}}</td>
+                <td data-label="User Name &nbsp;: &nbsp;">{{userName[i]}}</td>
+                <td *ngIf="data.response[0].result; else runthis" data-label="Score &nbsp;: &nbsp;">{{data.response[0].result}}</td>
+                <ng-template #runthis>
+                    <td data-label="Score &nbsp;: &nbsp;">Not Attempted</td>
+                </ng-template>        
+            </tr>
+          
+          </tbody>
+    </table>
+    </div>

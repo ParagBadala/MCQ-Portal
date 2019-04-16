@@ -1,0 +1,16 @@
+.btn {
+  border-right : 2px solid white;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    div {
+      display: block;
+    }
+    button {
+        margin-top: 1%;
+    }
+}

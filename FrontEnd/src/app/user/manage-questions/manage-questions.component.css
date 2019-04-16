@@ -1,0 +1,89 @@
+.tableHead {
+    background-color: grey; 
+    color: white;
+    text-align: center;
+}
+
+#queHead {
+    width: 50%;
+} 
+
+.textarea textarea{
+    width: 100%;
+    resize: none;
+}
+#queRow {
+    max-width: 500px;
+} 
+
+.options{
+    margin-bottom: 1%;
+}
+
+.diffLevel div{
+  margin-left: 6%;
+} 
+
+.alignCenter {
+    text-align: center;
+}
+
+.scrollit {
+  overflow-y:auto;
+  height:81vh;
+  top: 0;
+  border-bottom: 1px solid rgb(218, 213, 213)
+}
+
+label {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+    table {
+      border: 0;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: left;
+    }
+
+    td {
+        text-align: left;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }

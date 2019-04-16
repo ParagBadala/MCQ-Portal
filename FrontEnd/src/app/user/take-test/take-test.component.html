@@ -1,0 +1,35 @@
+<app-dashboard></app-dashboard>
+<div *ngIf="testDetails.length==0">
+  <h1>
+    No Tests Available
+  </h1>
+</div>
+<div *ngIf="testDetails.length>0">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Test ID</th>
+            <th>Test Name</th>
+            <th>Test Category</th>
+            <th>Test Duration</th>
+            <th>Start Time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let info of testDetails; let i=index">
+            <td data-label="Test ID">{{info.t_id}}</td>
+            <td data-label="Test Name">{{info.t_name}}</td>
+            <td data-label="Test Category">{{info.t_category}}</td>
+            <td data-label="Test Duration">{{info.t_duration/60000}}</td>
+            <td data-label="Test Time">{{info.start_time | date:'medium'}}</td>
+            <td><button class="btn btn-primary" (click)="startTest(i)">Start Test</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div *ngIf="serverMsg">
+  {{serverMsg}}
+</div>
+

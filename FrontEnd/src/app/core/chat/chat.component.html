@@ -1,0 +1,27 @@
+<div id="live-chat">
+  <header class="clearfix" (click)="showChat()">
+    <i class="fas fa-angle-up" *ngIf="showDiv" ></i>
+    <i class="fas fa-angle-down" *ngIf="!showDiv"></i>
+    <h4>Message</h4>
+  </header>
+  <div class="chat" *ngIf="!showDiv">
+    <div class="chat-history">
+      <ng-container *ngFor="let obj of chatHistory">
+        <!-- <div *ngFor="let chat of obj.msgObj"> -->
+          <div class="chat-message clearfix">
+            <div class="chat-message-content clearfix">
+              <h5>{{obj.name}}</h5>
+              <span class="chat-time">{{obj.timestamp| amCalendar}}</span>
+              <p>{{obj.msg}}</p>
+            </div>
+          </div>
+          <hr>
+        <!-- </div> -->
+      </ng-container>
+    </div>
+    <form class="form">
+      <input type="text" placeholder="Type your message…" name="msg" [(ngModel)]="chat" (keyup.enter)="message()"
+        autocomplete="off" autofocus>
+    </form>
+  </div>
+</div> 

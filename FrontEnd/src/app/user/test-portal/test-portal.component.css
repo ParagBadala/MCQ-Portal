@@ -1,0 +1,27 @@
+.attempted {
+    background-color: green !important;
+}
+.active {
+    background-color: brown !important;
+}
+
+.timer {
+    float: right;
+}
+
+.card-body {
+    height: 150px;
+}
+
+.card {
+    justify-content: center;
+}
+
+ textarea{
+    width: 100%;
+    resize: none;
+}
+
+.testBtn {
+    padding-left:5%;
+}

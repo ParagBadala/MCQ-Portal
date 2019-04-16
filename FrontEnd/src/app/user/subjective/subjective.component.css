@@ -1,0 +1,24 @@
+.questionForm{
+    padding-top: 20px;
+}
+
+textarea.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+.error{
+    color: red;
+}
+
+.custom-select {
+    width: 220px;
+}
+
+textarea {
+    resize: none;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 500;
+}

@@ -1,0 +1,21 @@
+.left-panel{
+    /* background-color: grey; */
+    height: 100%;
+    position: fixed;
+    left:0;
+    border: 1px solid gray;
+}
+
+.right-panel{
+    /* background-color: grey;    */
+    height: 100%;
+    position: fixed;
+    right: 0;   
+    border: 1px solid grey;
+}
+
+.main-panel{
+    padding-top: 10px;
+    position: relative;
+    left: 17%;
+}

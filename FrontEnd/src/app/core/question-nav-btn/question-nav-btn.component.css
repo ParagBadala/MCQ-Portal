@@ -1,0 +1,18 @@
+.attempted {
+    background-color: green !important;
+    color: black;
+}
+.active {
+    background-color: rgb(73, 71, 247) !important;
+}
+
+.navBtn {
+    padding: 1%;
+    float: left;
+}
+
+.btn {
+    width : 3vw;
+    height: 5vh;
+    text-align: center;
+}

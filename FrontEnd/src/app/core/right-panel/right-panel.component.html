@@ -1,0 +1,9 @@
+<div *ngIf="display">
+<app-question-nav-btn></app-question-nav-btn>
+</div>
+<div *ngIf="messageRoom">
+    <app-message-room></app-message-room>
+</div>
+<div *ngIf="!window">
+    <app-chat></app-chat>
+</div>

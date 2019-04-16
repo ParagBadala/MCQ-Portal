@@ -1,0 +1,16 @@
+<!-- <div class="form form-inline">
+  <div *ngFor="let filterItem of filterOptions; let i = index;" class="form-check" style="padding-right:20px;">
+    {{filterItem.label}}
+    <label class="form-check-label" *ngFor="let filterValue of filterItem.value; let j = index">
+      <input type="checkbox" class="form-check-input" (click)="checked(i,j)">{{filterValue.label}}
+    </label>
+  </div>
+</div>   -->
+<div class="filterPage">
+    <ul *ngFor="let filterItem of filterOptions; let i = index;" class="list-unstyled form-check">
+        <span id="label">{{filterItem.label}}</span>
+      <li *ngFor="let filterValue of filterItem.value; let j = index" class="form-check-label">  
+          <input type="checkbox" class="form-check-input" (click)="checked(i,j)">{{filterValue.label}}
+      </li>
+    </ul>
+</div>

@@ -1,0 +1,10 @@
+.header {
+    padding: 15px;
+    background-color: grey;
+    color: white;
+    font-size: 20px;
+}
+
+.header input {
+    margin-left: 10px;
+}

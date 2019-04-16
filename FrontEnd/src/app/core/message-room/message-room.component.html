@@ -1,0 +1,36 @@
+<div class="scrollit">
+    <div class="chat-sidebar">
+        <span>Messages - </span>
+          <div class="sidebar-name " *ngFor="let chatObj of userList">        
+                <a href="javascript:void(0)" (click)="openChatWindow(chatObj)">{{chatObj.name}}</a>
+          </div>
+    </div>
+</div>
+
+<div id="live-chat" *ngIf="showWindow">
+            <header class="clearfix" (click)="showChat()">
+              <i class="fas fa-angle-up" *ngIf="showDiv" ></i>
+              <i class="fas fa-angle-down" *ngIf="!showDiv"></i>
+              <h4>{{windowName}}</h4>
+            </header>
+            <div class="chat" *ngIf="!showDiv">
+              <div class="chat-history">
+                <!-- <ng-container *ngFor="let obj of messages"> -->
+                  <div *ngFor="let chat of messages">
+                    <div class="chat-message clearfix">
+                      <div class="chat-message-content clearfix">
+                        <h5>{{chat.name}}</h5>
+                        <span class="chat-time">{{chat.timestamp| amCalendar}}</span>
+                        <p>{{chat.msg}}</p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                <!-- </ng-container> -->
+              </div>
+              <form class="form">
+                <input type="text" placeholder="Type your message…" name="msg" [(ngModel)]="adminMsg" (keyup.enter)="sendMsg()"
+                  autocomplete="off" autofocus>
+              </form>
+            </div> 
+          </div> 

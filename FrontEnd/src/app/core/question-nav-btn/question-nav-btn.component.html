@@ -1,0 +1,5 @@
+<div *ngFor="let num of numbers; let i = index" class="navBtn" >
+    <button class="btn btn-outline-primary" [class.active]="i==currentIndex"
+        [class.attempted]="isapplied[i]" (click)="buttonClicked(i)">{{num+1}}</button>
+</div>
+

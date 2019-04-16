@@ -1,0 +1,112 @@
+<app-dashboard></app-dashboard>
+<div class="scrollit">
+    <div *ngIf="questions.length == 0">
+        <h1 style="color:black">
+          No Questions Found.
+        </h1>
+      </div>
+<table class="table table-bordered table-hover" *ngIf="questions.length>0">
+  <thead class="tableHead">
+    <th>S. No</th>
+    <th id="queHead">Question</th>
+    <th>Difficulty Level</th>
+    <th>Operation</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of questions; let i=index">
+      <td class="alignCenter" data-label="S. No &nbsp;: &nbsp;">{{i+1}}</td>
+      <td id="queRow" data-label="Question &nbsp;: &nbsp;">{{question.question_description}}</td>
+      <td class="alignCenter" data-label="Difficulty Level &nbsp;: &nbsp;">{{question.q_difficulty | titlecase}}</td>
+      <td class="alignCenter" data-label="Operation &nbsp;: &nbsp;">
+        <!-- <button type="button" [disabled]="question.approved_by" data-toggle="modal" data-target="#editModal" (click)="editQuestion(i)">Edit</button>
+        <button type="button" [disabled]="question.approved_by">Delete</button> -->
+        <button type="button" class="btn btn-success" [disabled]="question.status == 'active'"  data-toggle="modal" data-target="#editModal" (click)="editQuestion(i)">Edit</button>
+        &nbsp;
+        <button type="button" class="btn btn-danger" [disabled]="question.status == 'active'" (click)="deleteQuestion(i)" >Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="modal fade" id="editModal" *ngIf="editQuest">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Manage Question :</h4>
+            </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4">
+                      <label for="question">Question :</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8 textarea">
+                      <textarea rows="2" name="question" [(ngModel)]="updatedQuest"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <div class="row">
+                      <div class="col-lg-4 col-md-4">
+                          <label for="options">Options :</label>
+                      </div>
+                      <div class="col-lg-8 col-md-8">
+                          <div class="row" *ngFor="let option of editQuest.options; let i = index">
+                            <div class="col-lg-10 col-md-10 options">
+                            <input type="text" class="form-control col-10" value={{option}} placeholder="Enter option {{i+1}} here">
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                            <input type="radio" name="correct" value="{{option}}" (change)="correctAnswer($event)" [checked]="option==answer">
+                            </div>
+                              
+                            </div>
+                      </div>
+                    </div>
+              </div>
+
+              <div>
+                  <div class="row">
+                      <div class="col-lg-4 col-md-4">
+                          <label> Correct Anwser :</label>
+                      </div>
+                      <div class="col-lg-8 col-md-8">
+                          {{answer}}
+                      </div>
+                    </div>
+              </div>
+              <!-- <br/> -->
+
+              <div class="form-group">
+                  <div class="row">
+                      <div class="col-lg-4 col-md-4">
+                          <label for="level">Difficulty Level :</label>
+                      </div>
+                      <div class="col-lg-8 col-md-8 diffLevel">
+                          <div>
+                              <input type="radio" class="form-check-input" value="low" name="levelRadio" [(ngModel)]="level" [checked]="level==='low'">Low
+                          </div>
+                          <div>
+                            <input type="radio" class="form-check-input" value="medium" name="levelRadio" [(ngModel)]="level" [checked]="level==='medium'">Medium
+                          </div>
+                          <div>
+                            <input type="radio" class="form-check-input" value="difficult" name="levelRadio" [(ngModel)]="level" [checked]="level==='difficult'">Difficult
+                          </div>
+                      </div>
+                    </div>
+              </div>
+            </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="updatedQuestion()" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+    </div>

@@ -1,0 +1,27 @@
+<app-dashboard></app-dashboard>
+<div class="scrollit">
+    <table class="table table-bordered" >
+        <thead>
+          <tr class="table-secondary">
+            <th>Test ID</th>
+            <th>Test Name</th>
+            <th>Total No. of Participants</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+            <tr *ngFor="let data of testDetails">
+              <td data-label="Test ID &nbsp;: &nbsp;">
+                {{data.t_id}}
+                </td>
+                <td data-label="Test Name &nbsp;: &nbsp;">{{data.t_name}}</td>
+                <td data-label="Total No. of Particpants &nbsp;: &nbsp;">{{data.participants.length}}</td>
+              <td data-label="Action &nbsp;: &nbsp;">
+              <button class="btn btn-info" (click) = "viewResult(data._id)">View Result</button>&nbsp;
+          </td>
+            </tr>
+          
+          </tbody>
+    </table>
+    </div>

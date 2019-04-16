@@ -1,0 +1,127 @@
+<div *ngIf="addQuestionForm" class="questionForm scrollit" (submit)="onSubmit()">
+    <form [formGroup]="addQuestionForm" class="form">
+
+        <!-- Dropdown for category -->
+        <div>
+            <label for="category">Category</label>
+            &nbsp;
+            <select formControlName="category" class="custom-select">
+                <!-- <option selected disabled>--Please select category--</option> -->
+                <option class="placeholder" selected value=""> -- Please Select Category -- </option>
+                <option *ngFor="let category of categories" value="{{category}}">
+                    {{category}}
+                </option>
+            </select>
+            <div *ngIf="addQuestionForm.controls.category.invalid && addQuestionForm.controls.category.touched">
+                <small class="error" *ngIf="addQuestionForm.controls.question.errors?.required"><sup>*</sup>Required</small>
+            </div>
+        </div>
+
+        &nbsp;
+
+        <!-- Question Description -->
+        <div>
+            <label for="question">Question</label>
+            <!-- <input type="text" formControlName="question" class="form-control" placeholder="Enter question here"> -->
+            <textarea formControlName="question" class="form-control" placeholder="Enter question here"></textarea>
+            <div *ngIf="addQuestionForm.controls.question.invalid && addQuestionForm.controls.question.touched">
+                <small class="error" *ngIf="addQuestionForm.controls.question.errors?.required"><sup>*</sup>Required</small>
+            </div>
+        </div>
+
+        &nbsp;
+
+        <!-- Options and checkboxes -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-9">
+                    <label for="option">Options</label>
+                </div>
+                <div class="col-md-3">
+                    <label for="correct">Correct Answer</label>
+                </div>
+            </div>
+
+            <div>
+                <div formArrayName="options" *ngFor="let option of addQuestionForm.get('options').controls; let i = index">
+                    <div class="row">
+                        <div [formGroupName]="i" class="form-inline col-md-9">
+                            <input type="text" formControlName="option" class="form-control col-10" placeholder="Enter option {{i+1}} here">
+                            &nbsp;
+                            <button type="button" class="btn btn-danger" (click)="deleteOption(i)">X</button>
+                        </div>
+
+                        <div class="col-md-3 corrAnsCheckbox" >
+                            <input type="checkbox" name="options" value="option" (click)="stopChecking($event,i)"
+                                (change)="changeAnswer($event,i)">
+                        </div>
+
+
+                    </div>
+                    &nbsp;
+                </div>
+
+                <div *ngIf="addQuestionForm.controls.options.invalid">
+                    <small class="error" *ngIf="addQuestionForm.controls.options.errors?.minlength"><sup>*</sup>Add
+                        minimum 3 options</small>
+                </div>
+
+                <div *ngIf="addQuestionForm.controls.correctAnswer.invalid">
+                    <small class="error" *ngIf="addQuestionForm.controls.correctAnswer.errors?.required"><sup>*</sup>Select
+                        an answer</small>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-primary" (click)="addOption()">Add Option Field</button>
+        </div>
+
+        &nbsp;
+
+        <!-- Selected correct answer -->
+
+        <div *ngIf="correctMultipleAnswer?.length != 0">
+            <label for="correctAnswer">Correct Answer/s</label>
+            <div *ngFor="let answer of correctMultipleAnswer">
+                <input type="text" class="form-control" value="{{answer}}" placeholder="Enter correct option here"
+                    disabled>
+            </div>
+        </div>
+
+
+        &nbsp;
+
+        <!-- Difficulty level radio button -->
+
+        <div>
+            <label for="difficultyLevel">Difficulty Level</label>
+
+            <div>
+                <input type="radio" formControlName="difficultyLevel" value="low">
+                <span>Low</span>
+            </div>
+
+            <div>
+                <input type="radio" formControlName="difficultyLevel" value="medium">
+                <span>Medium</span>
+            </div>
+            <div>
+                <input type="radio" formControlName="difficultyLevel" value="difficult">
+                <span>Difficult</span>
+            </div>
+        </div>
+
+        <div *ngIf="addQuestionForm.controls.difficultyLevel.invalid">
+            <small class="error" *ngIf="addQuestionForm.controls.difficultyLevel.errors?.required"><sup>*</sup>Please
+                select one option</small>
+        </div>
+
+        &nbsp;
+
+        <!-- Button to submit form -->
+        <div>
+            <button type="submit" class="btn btn-success" [disabled]="addQuestionForm.invalid">Submit Question</button>
+        </div>
+    </form>
+</div>

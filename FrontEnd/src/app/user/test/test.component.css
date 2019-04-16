@@ -1,0 +1,33 @@
+.error{
+    color : red;
+}
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.scrollit  {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 81vh;
+    top:0;
+    border-bottom: 1px solid rgb(218, 213, 213)
+}
+
+.scrollit2  {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 17vh;
+    top:0;
+    border: 1px solid rgb(236, 233, 233);
+    padding: 3px;
+}
+
+.usersDiv {
+    margin-bottom: 1%; 
+}

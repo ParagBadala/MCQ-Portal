@@ -1,0 +1,26 @@
+<app-dashboard></app-dashboard>
+<div class="scrollit">
+<table class="table table-responsive table-bordered table-hover" >
+    <thead>
+      <tr class="table-secondary">
+        <th id="srNo">Sr. No.</th>
+        <th id="queRow">Questions</th>
+        <th >Options</th>
+      </tr>
+    </thead>
+   <tbody>
+          <tr *ngFor="let question of questions; let i=index" >
+            <td class="srNo" data-label="Sr. No. &nbsp;: &nbsp;">{{i+1}}</td>
+            <td data-label="Question &nbsp;: &nbsp;">
+               {{question.question_description}}
+            </td>
+            <td class="options" data-label="Options &nbsp;: &nbsp;" >
+              <div *ngFor="let opt of question.options, let i=index">
+                 {{i+1}}) {{opt}}
+              </div>
+               
+            </td>
+          </tr>
+  </tbody>
+  </table>
+</div>

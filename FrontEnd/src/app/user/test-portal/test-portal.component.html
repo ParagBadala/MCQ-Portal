@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header" *ngIf="currentQuestion">
+            <div class="row">
+                <div class="col-lg-9">
+                    <label><strong>Question : </strong>{{currentQuestion.question_description}}</label>
+                </div>
+                <div class="col-lg-3">
+                    <div class="timer">
+                        Time Remaining: {{minute}}:{{second}}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="card-body" *ngIf="currentQuestion">
+
+            <div *ngFor="let option of currentQuestion.options">
+                <!-- <div *ngIf="currentQuestion.q_type=='single'">
+                          <input type="radio" name="opt" [checked]="response[currentIndex].answer[0] == option" value="{{option}}" (click)="changeResponse(option, $event)">{{option}}
+                        </div>
+                        <div *ngIf="currentQuestion.q_type=='multiple'">
+                            <input type="checkbox" value="{{option}}" [checked]="response[currentIndex].answer.includes(option)" (click)="changeResponse(option, $event)">{{option}}
+                        </div> -->
+                <div *ngIf="currentQuestion.q_type=='single'">
+                    <input type="radio" name="opt" [checked]="response[currentIndex].answer[0] == option"
+                        value="{{option}}" (click)="changeResponse(option, $event)">{{option}}
+                </div>
+                <div *ngIf="currentQuestion.q_type=='multiple'">
+                    <input type="checkbox" value="{{option}}" [checked]="response[currentIndex].answer.includes(option)"
+                        (click)="changeResponse(option, $event)">{{option}}
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-lg-3">
+                    <span *ngIf="currentIndex>0">
+                        <button type="button" class="btn btn-outline-primary" (click)="prevQuestion()">Previous</button>
+                    </span>
+                    &nbsp;
+                    <span *ngIf="currentIndex+1 != maxQuestion">
+                        <button type="button" class="btn btn-outline-primary"
+                            (click)="nextQuestion('next')">Next</button>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <!-- <div *ngFor="let num of numbers; let i = index" style="float:left">
+                        <button class="btn btn-secondary" style="border-radius:50%" [class.active]="i==currentIndex"
+                            [class.attempted]="isapplied[i]" (click)="buttonClicked(i)">{{num+1}}</button>
+                    </div> -->
+                </div>
+                <div class="col-lg-3 testBtn">
+                    <div>
+                        <button type="button" class="btn btn-outline-success" (click)="saveResponseByUser()">Save</button>
+                        &nbsp;
+                        <button type="submit" class="btn btn-outline-success" (click)="submitTest()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

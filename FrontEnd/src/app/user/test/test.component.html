@@ -1,0 +1,177 @@
+<app-dashboard></app-dashboard>
+<div class="scrollit">
+<form name="addTestForm" #addTestForm=ngForm>
+  <div class="form-group">
+    <label for="name">Test ID</label>
+    <input type="text" [(ngModel)]="tId" class="form-control" placeholder="Test ID" name="tid" #TId="ngModel"
+      required minlength="3" (keyup)= "checkDuplicate(TId.value)">
+    <div *ngIf="TId.errors && (TId.dirty || TId.touched)">
+      <div [hidden]="!TId.errors?.required">
+        <small class="error"><sup>*</sup>Test ID required</small>
+      </div>
+      <div [hidden]="!TId.errors?.minlength">
+        <small class="error"><sup>*</sup>Test ID should be of atleast 3 characters</small>
+      </div>
+    </div>
+    <div *ngIf="!isValid">
+        <small class="error"><sup>*</sup>Test ID already exist</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Test Name</label>
+    <input type="text" [(ngModel)]="tName" class="form-control" placeholder="Test Name" name="tname" #testName="ngModel"
+      required minlength="3">
+    <div *ngIf="testName.errors && (testName.dirty || testName.touched)">
+      <div [hidden]="!testName.errors?.required">
+        <small class="error"><sup>*</sup>Test name required</small>
+      </div>
+      <div [hidden]="!testName.errors?.minlength">
+        <small class="error"><sup>*</sup>Test name should be of atleast 3 characters</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Test Category</label>&nbsp;
+    <select [(ngModel)]="tCategory" name="tcat" #testCategory="ngModel" required>
+      <option class="placeholder" selected value="">Select language</option>
+      <option *ngFor="let c of Category">{{ c }}</option>
+    </select>
+    <div *ngIf="testCategory.errors">
+      <div [hidden]="!testCategory.errors?.required">
+        <small class="error"><sup>*</sup>Test category required</small>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="name">Test Level</label>
+    <div class="form-check">
+      <p class="form-check-label">
+        <input type="radio" class="form-check-input" value="low" [(ngModel)]="tLevel" name="optradio" #testLevel="ngModel"
+          required>Low
+      </p>
+    </div>
+    <div class="form-check">
+      <p class="form-check-label">
+        <input type="radio" class="form-check-input" value="medium" [(ngModel)]="tLevel" name="optradio" #testLevel="ngModel"
+          required>Medium
+      </p>
+    </div>
+    <div class="form-check disabled">
+      <p class="form-check-label">
+        <input type="radio" class="form-check-input" value="difficult" [(ngModel)]="tLevel" name="optradio" #testLevel="ngModel"
+          required>Difficult
+      </p>
+    </div>
+    <div class="form-check disabled">
+      <p class="form-check-label">
+        <input type="radio" class="form-check-input" value="mixed" [(ngModel)]="tLevel" name="optradio" #testLevel="ngModel"
+          required>Mixed
+      </p>
+    </div>
+    <div *ngIf="testLevel.errors">
+      <div [hidden]="!testLevel.errors?.required">
+        <small class="error"><sup>*</sup>Test level required</small>
+      </div>
+    </div>
+  </div>
+
+  &nbsp;
+
+  <div class="form-group">
+    <label for="name">Test Duration</label>
+    <input type="number" [(ngModel)]="tDuration" class="form-control" placeholder="Test Duration(in mins)" name="tDur"
+      #testDuration="ngModel" min="10" max="60" required>
+    <div *ngIf="testDuration.errors && (testDuration.dirty || testDuration.touched) || tDuration<10 || tDuration>60">
+      <div [hidden]="!testDuration.errors?.required">
+        <small class="error"><sup>*</sup>Test duration required and in number format only</small>
+      </div>
+      <div [hidden]="tDuration>=10">
+        <small class="error"><sup>*</sup>Test duration should be atleast 10 minutes</small>
+      </div>
+      <div [hidden]="tDuration<60">
+        <small class="error"><sup>*</sup>Total duration can be maximum 60 minutes</small>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="name">Total Question</label>
+    <input type="number" [(ngModel)]="totalQuestion" class="form-control" placeholder="Total Question" name="tnumber"
+      #totalQuestions="ngModel" required>
+    <div *ngIf="totalQuestions.errors && (totalQuestions.dirty || totalQuestions.touched) || totalQuestion<10 || totalQuestion>60">
+      <div [hidden]="!totalQuestions.errors?.required">
+        <small class="error"><sup>*</sup>Total questions required and in number format only</small>
+      </div>
+      <div [hidden]="totalQuestion>=10">
+        <small class="error"><sup>*</sup>Total questions should be atleast 10</small>
+      </div>
+      <div [hidden]="totalQuestion<60">
+        <small class="error"><sup>*</sup>Total questions can be maximum 60</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Test Participants</label>
+    <br/>
+    <input list="par" type="text" name="sUser" [(ngModel)]="selectedUser" (change)="addParticipants()" placeholder="Add Participants" autocomplete="off"> &nbsp;
+    <input list="grp" type="text" name="group" autocomplete="off" [(ngModel)]="selectedGroup" (change)="addGroup()" placeholder="Add Group" autocomplete="off">
+    <datalist id="par">
+      <option value="All Users">
+      <option *ngFor="let user of users | filter:listFilter" value="{{ user.firstName }} {{user.lastName}}" label="({{user.empId}})">
+    </datalist>
+    <datalist id="grp">
+        <option value="All Groups">
+        <option *ngFor="let group of groups | filter:listFilter" value="{{ group.groupName }}">
+      </datalist>
+    <div class="row">
+      <div class="col-md-10 offset-md-1 scrollit2 usersDiv" *ngIf='showUsers'>
+        <h6>Selected Participants:</h6>
+        <div *ngIf="showUsers">
+            <span *ngFor="let selectUser of tempParticipants; let i = index">
+                <button class="btn btn-outline-secondary btn-sm mr-1" (click)="removeParticipants(i,selectedUser)">
+                  {{selectUser.firstName}} {{selectUser.lastName}}
+                  <span class="fa fa-times-circle"></span>
+                </button>
+              </span>
+        </div>
+      </div>
+      <div class="col-md-10 offset-md-1 scrollit2" *ngIf="showGroups">
+          <div >
+              <h6>Groups: </h6>
+              <span *ngFor="let selectGroup of participatedGroup; let i = index">
+                    <button class="btn btn-outline-secondary btn-sm mr-1" (click)="removeGroupParticipated(i)">
+                        {{selectGroup.groupName}} 
+                          <span class="fa fa-times-circle"></span>
+                        </button>
+                </span> 
+           </div>
+      </div>
+    </div>
+    <div *ngIf="tempParticipants.length==0">
+      <small class="error"><sup>*</sup>Add atleast 1 participant</small>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label>Date & Time</label>&nbsp;
+    <input type="datetime-local" name="start" [(ngModel)]="startTime" (change)="displayTime()" required #testStartTime="ngModel">
+    <div *ngIf="testStartTime.errors && (testStartTime.dirty || testStartTime.touched)">
+      <div [hidden]="!testStartTime.errors?.required">
+        <small class="error"><sup>*</sup>Test duration required and in number format only</small>
+      </div>
+    </div>
+  </div>
+
+
+
+  <button type="button" class="btn btn-primary" (click)="postTest()" [disabled]="addTestForm.invalid || participants.length==0 || totalQuestion<10 || totalQuestion>60 || tDuration<10 || tDuration>60 || !isValid">Post
+    Test</button>
+</form>
+</div>
+

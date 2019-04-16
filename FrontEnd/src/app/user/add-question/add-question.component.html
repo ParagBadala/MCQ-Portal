@@ -1,0 +1,16 @@
+<app-dashboard></app-dashboard>
+<div class="header">
+    <input type="radio" name="question-type" value="single" (click)="addSingleAnswerQuestion()">Single
+    <input type="radio" name="question-type" value="multiple" (click)="addMultipleAnswerQuestion()">Multiple
+    <input type="radio" name="question-type" value="subjective" (click)="addSubjectiveQuestion()">Subjective
+
+</div>
+<div *ngIf="singleAnswerQuestion">
+    <app-single-choice></app-single-choice>
+</div>
+<div *ngIf="multipleAnswerQuestion">
+    <app-multiple-choice></app-multiple-choice>
+</div>
+<div *ngIf="subjectiveQuestion">
+    <app-subjective></app-subjective>
+</div>

@@ -1,0 +1,42 @@
+[
+    {
+        "type": "q_difficulty",
+        "label": "Level",
+        "value": [
+            {
+                "label":"low",
+                "checked":false
+            },
+            {
+                "label":"medium",
+                "checked":false
+            },
+            {
+                "label":"difficult",
+                "checked":false
+            }
+        ]
+    },
+    {
+        "type": "category",
+        "label": "Category",
+        "value": [
+            {
+                "label":"Angular",
+                "checked":false
+            },
+            {
+                "label":"React JS",
+                "checked":false
+            },
+            {
+                "label":"Node JS",
+                "checked":false
+            },
+            {
+                "label":"JavaScript",
+                "checked":false
+            }
+        ]
+    }
+]
